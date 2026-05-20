@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Task Manager</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="auth-shell">
+    <section class="auth-panel" aria-labelledby="auth-title">
+        <div class="brand-lockup">
+            <img src="/favicon.svg" alt="" class="brand-mark">
+            <div>
+                <p class="eyebrow">Student workspace</p>
+                <h1 id="auth-title">Student Task Manager</h1>
+            </div>
+        </div>
+
+        <div class="auth-card">
+            <div class="auth-card-header">
+                <div>
+                    <p class="eyebrow">Secure access</p>
+                    <h2 id="form-title">Sign in</h2>
+                </div>
+                <label class="theme-toggle" for="theme-toggle">
+                    <span>Dark</span>
+                    <input id="theme-toggle" type="checkbox" aria-label="Toggle dark mode">
+                    <span class="toggle-track" aria-hidden="true"></span>
+                </label>
+            </div>
+
+            <form id="auth-form" class="auth-form" novalidate>
+                <div class="field-group" id="name-field" hidden>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="displayName" type="text" autocomplete="name" maxlength="120">
+                </div>
+                <div class="field-group">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="field-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" required>
+                </div>
+
+                <button id="submit-button" class="primary-button" type="submit">Sign in</button>
+            </form>
+
+            <div class="provider-grid" aria-label="External provider authentication options">
+                <button class="provider-button" type="button" data-provider="google">Continue with Google</button>
+                <button class="provider-button" type="button" data-provider="github">Continue with GitHub</button>
+            </div>
+
+            <p id="auth-message" class="auth-message" role="status" aria-live="polite"></p>
+
+            <button id="mode-toggle" class="text-button" type="button">
+                Need an account? Sign up
+            </button>
+        </div>
+    </section>
+
+    <aside class="auth-visual" aria-label="Task preview">
+        <div class="preview-board">
+            <div class="preview-header">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="preview-task high">
+                <strong>Calculus exam review</strong>
+                <span>High priority</span>
+            </div>
+            <div class="preview-task medium">
+                <strong>History essay draft</strong>
+                <span>Medium priority</span>
+            </div>
+            <div class="preview-task low">
+                <strong>Reading notes</strong>
+                <span>Low priority</span>
+            </div>
+        </div>
+    </aside>
+</main>
+<script src="/auth.js" defer></script>
+</body>
+</html>

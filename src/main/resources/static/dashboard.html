@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Student Task Manager</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="/dashboard.html" aria-label="Student Task Manager dashboard">
+        <img src="/favicon.svg" alt="">
+        <span>Student Task Manager</span>
+    </a>
+
+    <section class="progress-summary" aria-labelledby="progress-label">
+        <div class="progress-copy">
+            <span id="progress-label">0% complete</span>
+            <span id="task-count-label">No tasks yet</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+            <span id="progress-fill"></span>
+        </div>
+    </section>
+
+    <div class="topbar-actions">
+        <label class="theme-toggle" for="theme-toggle">
+            <span>Dark</span>
+            <input id="theme-toggle" type="checkbox" aria-label="Toggle dark mode">
+            <span class="toggle-track" aria-hidden="true"></span>
+        </label>
+        <button id="logout-button" class="ghost-button" type="button">Sign out</button>
+    </div>
+</header>
+
+<main class="dashboard-shell">
+    <section class="workspace" aria-labelledby="workspace-title">
+        <div class="workspace-header">
+            <div>
+                <p id="welcome-label" class="eyebrow">Welcome back</p>
+                <h1 id="workspace-title">Tasks</h1>
+            </div>
+            <nav class="view-tabs" aria-label="Task dashboard views">
+                <button class="tab-button active" type="button" data-view="all">All Tasks</button>
+                <button class="tab-button" type="button" data-view="upcoming">Upcoming This Week</button>
+                <button class="tab-button" type="button" data-view="settings">Settings</button>
+            </nav>
+        </div>
+
+        <section id="tasks-view" class="tasks-layout" aria-label="Task workspace">
+            <form id="task-form" class="task-form" novalidate>
+                <div class="form-heading">
+                    <div>
+                        <p class="eyebrow">Task details</p>
+                        <h2 id="task-form-title">New task</h2>
+                    </div>
+                    <button id="cancel-edit-button" class="text-button" type="button" hidden>Cancel</button>
+                </div>
+
+                <div class="field-grid">
+                    <div class="field-group span-2">
+                        <label for="task-title">Title</label>
+                        <input id="task-title" name="title" type="text" maxlength="140" required>
+                    </div>
+                    <div class="field-group span-2">
+                        <label for="task-description">Description</label>
+                        <textarea id="task-description" name="description" rows="4" maxlength="1200"></textarea>
+                    </div>
+                    <div class="field-group">
+                        <label for="task-category">Category</label>
+                        <select id="task-category" name="category" required>
+                            <option value="PERSONAL">Personal</option>
+                            <option value="EXAM">Exam</option>
+                            <option value="ASSIGNMENT">Assignment</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="task-priority">Priority</label>
+                        <select id="task-priority" name="priority" required>
+                            <option value="HIGH">High</option>
+                            <option value="MEDIUM">Medium</option>
+                            <option value="LOW">Low</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="task-due-date">Due date</label>
+                        <input id="task-due-date" name="dueDate" type="date" required>
+                    </div>
+                </div>
+
+                <button id="task-submit-button" class="primary-button" type="submit">Create task</button>
+            </form>
+
+            <section class="task-list-panel" aria-labelledby="task-list-title">
+                <div class="list-header">
+                    <div>
+                        <p class="eyebrow" id="task-list-kicker">Current workload</p>
+                        <h2 id="task-list-title">All Tasks</h2>
+                    </div>
+                    <span id="visible-count" class="count-pill">0</span>
+                </div>
+                <div id="task-list" class="task-list" aria-live="polite"></div>
+            </section>
+        </section>
+
+        <section id="settings-view" class="settings-panel" aria-labelledby="settings-title" hidden>
+            <div class="form-heading">
+                <div>
+                    <p class="eyebrow">Profile preferences</p>
+                    <h2 id="settings-title">Notification Settings</h2>
+                </div>
+            </div>
+
+            <form id="settings-form" class="settings-form">
+                <fieldset>
+                    <legend>Digest frequency</legend>
+                    <label class="check-row">
+                        <input id="digest-daily" type="checkbox" name="digestFrequency" value="DAILY">
+                        <span>Daily summaries</span>
+                    </label>
+                    <label class="check-row">
+                        <input id="digest-weekly" type="checkbox" name="digestFrequency" value="WEEKLY">
+                        <span>Weekly summaries</span>
+                    </label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Category reminders</legend>
+                    <label class="check-row">
+                        <input id="exam-reminders" type="checkbox" name="examReminders">
+                        <span>Exam reminders</span>
+                    </label>
+                    <label class="check-row">
+                        <input id="assignment-reminders" type="checkbox" name="assignmentReminders">
+                        <span>Assignment reminders</span>
+                    </label>
+                </fieldset>
+
+                <div class="field-group">
+                    <label for="timezone-select">Timezone</label>
+                    <select id="timezone-select" name="timezone"></select>
+                </div>
+
+                <button class="primary-button" type="submit">Save settings</button>
+            </form>
+        </section>
+    </section>
+
+    <aside class="calendar-sidebar" aria-labelledby="calendar-title">
+        <div class="calendar-card">
+            <div class="calendar-header">
+                <button id="previous-month" class="icon-button" type="button" aria-label="Previous month">&lsaquo;</button>
+                <h2 id="calendar-title">Calendar</h2>
+                <button id="next-month" class="icon-button" type="button" aria-label="Next month">&rsaquo;</button>
+            </div>
+            <div class="weekday-grid" aria-hidden="true">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+            </div>
+            <div id="calendar-grid" class="calendar-grid" aria-live="polite"></div>
+        </div>
+    </aside>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="/app.js" defer></script>
+</body>
+</html>
